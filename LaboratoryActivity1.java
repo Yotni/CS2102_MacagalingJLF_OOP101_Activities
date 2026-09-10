@@ -10,19 +10,27 @@ public class LaboratoryActivity1 {
         int FoodQuantity =-1;
 
         int Total_Items = 0;
-        int Subtotal = 0;
-        int Discount_Amount = 0;
-        int Order_total = 0;
+        // int Subtotal = 0;
+        // int Discount_Amount = 0;
+        // int Order_total = 0;
+        double Total_Discount = 0;
+        double Total_Of_Subtotal = 0;
+        double Final_Amount = 0;
+
 
 
         while(true){
             System.out.println("=======      Menu      =======");
-            System.out.printf("%-21s - $%.2f \n", "1. Burger", 20.00);
-            System.out.printf("%-21s - $%.2f \n", "2. Pizza Slize", 25.00);
-            System.out.printf("%-21s - $%.2f \n", "3. Siaomai Rice", 45.00);
-            System.out.printf("%-21s - $%.2f \n", "4. Spaghetti", 50.00);
-            System.out.printf("%-21s - $%.2f \n", "5. Chicksilog", 65.00);
+            System.out.printf("%-21s - $%.2f \n", "1. Hungarian Sandwich", 80.00);
+            System.out.printf("%-21s - $%.2f \n", "2. Pizza ", 120.00);
+            System.out.printf("%-21s - $%.2f \n", "3. Porksilog ", 100.00);
+            System.out.printf("%-21s - $%.2f \n", "4. Spaghetti ", 70.00);
+            System.out.printf("%-21s - $%.2f \n", "5. Chicksilog ", 90.00);
 
+
+            double Subtotal = 0;
+            double Discount_Amount = 0;
+            double Order_total = 0;
 
             System.out.print("Enter item number: ");
             FoodInput = scanner.nextInt();
@@ -37,67 +45,97 @@ public class LaboratoryActivity1 {
     
                 switch (FoodInput) {
                     case 1:
-                        Subtotal += 20*(FoodQuantity);
+                        Subtotal += 80.00*(FoodQuantity);
                         break;
                     case 2:
-                        Subtotal += 25*(FoodQuantity);
+                        Subtotal += 120.00*(FoodQuantity);
                         break;
                     case 3:
-                        Subtotal += 45*(FoodQuantity);
+                        Subtotal += 100.00*(FoodQuantity);
                         break;
                     case 4:
-                        Subtotal += 50*(FoodQuantity);
+                        Subtotal += 70.00*(FoodQuantity);
                         break;
                     case 5:
-                        Subtotal += 65*(FoodQuantity);
+                        Subtotal += 90.00*(FoodQuantity);
                         break;
                 
                     default:
                         break;
                 }
 
-                Total_Items ++;
+                Total_Items += FoodQuantity;
+                System.out.println("Subtotal: $" + Subtotal);
+
+                // if (isStudent == 'Y'){
+                //     if(Subtotal > 500){
+                //         Discount_Amount = (int)(0.15 * Subtotal);
+                //         Order_total = Subtotal - Discount_Amount;
+                //     }else if (Subtotal < 500){
+                //         Discount_Amount = (int)(0.05 * Subtotal);
+                //         Order_total = Subtotal - Discount_Amount;
+                //     }
+                // }
+                // else if (isStudent == 'N'){
+                //     if (Subtotal > 500){
+                //         Discount_Amount = (int)(0.05 * Subtotal);
+                //         Order_total = Subtotal - Discount_Amount;
+                //     }
+                // }
 
                 if (isStudent == 'Y'){
-                    if(Subtotal > 500){
-
+                    if(Subtotal < 500) {
+                        Discount_Amount = (int)(0.10 * Subtotal);
+                        Order_total = Subtotal - Discount_Amount;
                     }
-                }else;
-                    Discount_Amount = (int)(0.05 * Subtotal);
-                    Order_total = Subtotal - Discount_Amount;
+                    else if (Subtotal > 500){
+                         Discount_Amount = (int)(0.15 * Subtotal);
+                        Order_total = Subtotal - Discount_Amount;
+                    }
+                }
+                else if (isStudent == 'N'){
+                    if (Subtotal > 500){
+                        Discount_Amount = (int)(0.05 * Subtotal);
+                        Order_total = Subtotal - Discount_Amount;
+                    }
+                   
+                }
 
-                System.out.println("Subtotal: $" + Subtotal);
+
                 System.out.println("Discount: $" + Discount_Amount);
                 System.out.println("Order Total: $" + Order_total);
+
 
             }else{
                 System.out.println("Invalid Order! Please enter a valid items and quantity");   
             }
-                
 
-            do {
-                System.out.print("Do you want to oder again? (Y/N): ");
-                isOrdering = scanner.next().charAt(0);
-            }
-            while (isOrdering != 'Y' && isOrdering != 'N');
-                System.out.println("Invalid Input!");
+            Total_Of_Subtotal += Subtotal;
+            Total_Discount += Discount_Amount;
+            Final_Amount += Order_total;
 
-                
+            
+            System.out.print("Do you want to order again? (Y/N): ");
+            isOrdering = scanner.next().charAt(0);
+
             if (isOrdering == 'Y'){
                 continue;
             }
             else if (isOrdering == 'N'){
                 break;
             }
+            else{
+                continue;
+            }
 
         }    
 
         
         System.out.println("==== Order Summary ====");
-        System.out.println("Total Items: $" + Total_Items);
-        System.out.println("Total before discount: $" + Subtotal);
-        System.out.println("Total discount: $" + Discount_Amount);
-        System.out.println("Final amount: $" + Total_Items);
+        System.out.println("Total Items: " + Total_Items);
+        System.out.println("Total before discount: $" + Total_Of_Subtotal);
+        System.out.println("Total discount: $" + Total_Discount);
+        System.out.println("Final amount: $" + Final_Amount);
         
         scanner.close();
 
