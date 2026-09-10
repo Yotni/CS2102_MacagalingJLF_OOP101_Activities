@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class LaboratoryActivity1 {
-    static void main(String[] args) {
+class LaboratoryActivity1 {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         char isOrdering;
@@ -60,27 +60,32 @@ public class LaboratoryActivity1 {
                         break;
                 }
 
-                totalItems += foodQuantity;
+
 
                 if (isStudent == 'Y') {
                     if (Subtotal < 500) {
-                        Discount_Amount = (int)(0.10 * Subtotal);
+                        Discount_Amount = 0.10 * Subtotal;
                         
                     }
                     else if (Subtotal >= 500) {
-                         Discount_Amount = (int)(0.15 * Subtotal);
+                         Discount_Amount = 0.15 * Subtotal;
                         
                     }
                 }
                 else if (isStudent == 'N'){
                     if (Subtotal >= 500){
-                        Discount_Amount = (int)(0.05 * Subtotal);
+                        Discount_Amount = 0.05 * Subtotal;
 
                     }
                    
                 }
+                else if (isStudent != 'Y' && isStudent != 'N') {
+                    continue;
+                }   //Not sure if this was also ask to be done in number 6 in the activity or pertaining lang po siya 
+                    // sa asking if want to order again if invalid then continue
 
                 Order_total = Subtotal - Discount_Amount;
+                totalItems += foodQuantity;
 
                 System.out.printf("\nSubtotal: $%.2f\n",  Subtotal);
                 System.out.printf("Discount: $%.2f\n",  Discount_Amount);
